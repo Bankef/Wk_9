@@ -51,7 +51,8 @@
 
                 <div class="form-group">
                     <label class="form-label" for="type">What type?</label>
-                    <!-- TODO Create select element, use v-model to connect to the types -->
+                    <!-- TODO Create select element, use v-model to connect to the types
+                    I do not understand how to get this done. Tried a couple times and failed-->
 
                     <!-- TODO Use v-for to create option elements, one for each type -->
                     <select class="form-control" v-model="type">
@@ -73,6 +74,16 @@
                     <!-- TODO v-model media -->
                     <input id="media2" class="form-check-input" type="radio" value="Digital" v-model="medium">
                     <label class="form-check-label" for="media2"> Digital  </label>
+                </div><br>
+
+                <div class="form-check-inline">
+                    <input id="complete" class="form-check-input" type="checkbox" v-model="complete">
+                    <label class="form-check-label">Completed?</label>
+                </div> <br>
+
+                <div class="form-label pb-2">
+                    <label>Notes: </label> <br>
+                    <input type="textarea" id="note" maxlength="40" v-model="notes">
                 </div>
 
                 <div>
@@ -97,13 +108,18 @@
                             <th>How many hours?</th>
                             <th>Type</th>
                             <th>Media</th>
+                            <th>Completed?</th>
+                            <th>Notes</th>
+
                         </tr>
                         <!-- TODO use v-for to create one table row for each activity record -->
                         <tr v-for="record in activityRecords">
                             <td>{{ shortDate(record.date) }}</td>
                             <td>{{ record.hours }}</td>
-                            <td>{{ record.time}}</td>
+                            <td>{{ record.type}}</td>
                             <td>{{ record.medium}}</td>
+                            <td>{{ record.completed}}</td>
+                            <td>{{ record.notes}}</td>
                         </tr>
                     </table>
                 </div>
@@ -139,7 +155,9 @@
                 hours: 1,
                 type: 'Sketching',
                 medium: 'Traditional',
-
+                notes: '',
+                complete: false,
+                completed: "No",
                 activityRecords: [], //An array of all the activity records
 
                 // used with the select-option in the form for the user to select the type
@@ -174,14 +192,19 @@
                 if (!this.medium) {
                     this.errors.push('Select a medium')
                 }
-
+                if (this.complete){
+                    this.completed = "Yes"
+                }
                 if (this.errors.length == 0){
                     let newActivityRecord = {
                         date: date,
                         hours: this.hours,
                         type: this.type,
-                        medium: this.medium
+                        medium: this.medium,
+                        completed: this.completed,
+                        notes: this.notes
                 }
+
                 this.activityRecords.push(newActivityRecord)
 
                     // Sort the activity records
