@@ -156,7 +156,7 @@
                 type: 'Sketching',
                 medium: 'Traditional',
                 notes: '',
-                complete: false,
+                complete: false, //This is created for the complete check box
                 completed: "No",
                 activityRecords: [], //An array of all the activity records
 
@@ -181,6 +181,7 @@
                 }
 
                 // Verify that hours is a number, and within the correct range
+                // Form validations below
                 if (this.hours <= 0 || this.hours > 24) {
                     this.errors.push('The number of hours must be greater than 0 and less than or equal to 24')
                 }
@@ -192,7 +193,7 @@
                 if (!this.medium) {
                     this.errors.push('Select a medium')
                 }
-                if (this.complete){
+                if (this.complete){ //When complete is true, completed will be pushed as Yes and vice versa
                     this.completed = "Yes"
                 }
                 if (this.errors.length == 0){
