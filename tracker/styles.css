@@ -3,3 +3,14 @@
     overflow: scroll;
 }
 
+.Sketching {
+    background-color: aqua;
+}
+
+.Painting {
+    background-color: pink;
+}
+
+.Drawing {
+    background-color: yellow;
+}
